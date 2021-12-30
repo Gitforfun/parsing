@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import pymongo
+
 from bs4 import BeautifulSoup as bs
 import requests
 from pprint import pprint
@@ -61,8 +61,10 @@ def mongo_create():
     client = MongoClient('127.0.0.1', 27017)  # подключились к серверу
     db = client['vacancies_hh']  # создали базу
     engineers = db.engineers  # создали коллекцию
-    # engineers.create_index([('hash', pymongo.HASHED)], name='uniq_index', unique=True)  # создаем индексированную пару для кеша
-    #TODO не нравится, что при повторном запуске, опять ключ делается индексом. Сделать проверку на существование индекса.
+    # engineers.create_index([('hash', pymongo.HASHED)], name='uniq_index', unique=True)  # создаем индексированную
+    # пару для кеша
+    # TODO не нравится, что при повторном запуске, опять ключ делается индексом. Сделать проверку на
+    #  существование индекса.
     engineers.create_index('hash', unique=True)
     return engineers
 
